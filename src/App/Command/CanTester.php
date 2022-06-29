@@ -17,9 +17,4 @@ class CanTester extends Can
             'createTask'
         ]);
     }
-
-    protected function setResponsibilities($responsibilities)
-    {
-        $this->responsibilities = $responsibilities;
-    }
 }

@@ -16,9 +16,4 @@ class UserDesigner extends User
             'communication with manager'
         ]);
     }
-
-    protected function setResponsibilities($responsibilities)
-    {
-        $this->responsibilities = $responsibilities;
-    }
 }

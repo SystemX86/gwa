@@ -16,9 +16,4 @@ class UserTester extends User
             'create tasks'
         ]);
     }
-
-    protected function setResponsibilities($responsibilities)
-    {
-        $this->responsibilities = $responsibilities;
-    }
 }

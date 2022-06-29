@@ -23,4 +23,9 @@ abstract class User extends Command
 
         return Command::SUCCESS;
     }
+
+    protected function setResponsibilities($responsibilities)
+    {
+        $this->responsibilities = $responsibilities;
+    }
 }

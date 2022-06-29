@@ -16,9 +16,4 @@ class CanDesigner extends Can
             'communicateWithManager'
         ]);
     }
-
-    protected function setResponsibilities($responsibilities)
-    {
-        $this->responsibilities = $responsibilities;
-    }
 }
