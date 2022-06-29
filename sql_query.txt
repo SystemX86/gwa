@@ -1,0 +1,21 @@
+Э декілька рішень в залежності від того як інтерпретувати постановку.
+
+Якщо потрібно вибрати ігри з однаковою назвою які проходили у країні більше 3х разів з групуванням (думаю що саме цей варіант був описаний у постановці):
+
+SELECT name, country, COUNT(*) AS count FROM info_olympic_games GROUP BY name,country HAVING count > 2;
+
+
+Якщо потрібно вибрати всі ігри які проходили у країнах де було більше 3х ігор:
+
+SELECT * FROM info_olympic_games WHERE country IN (SELECT country FROM info_olympic_games GROUP BY country HAVING COUNT(*) > 2);
+
+
+Якщо потрібно вибрати ігри з однаковою назвою та країною в якій проходила гра, при цьому враховуючи що гра мала пройти у країні більше 3х разів (без групування по назві гри(країні) в якій проходила гра):
+
+SELECT C.* FROM ( SELECT name, country
+                  FROM info_olympic_games
+                  GROUP BY name, country
+                  HAVING COUNT(*) > 2 ) E
+    JOIN info_olympic_games C
+        ON C.name = E.name
+            AND C.country = E.country;
