@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Расчет ежемесячного платежа</title>
+
+    <script src="script.js"></script>
+    <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="container">
+        <div class="content-form">
+            <form method="post" name="creditCalculator">
+                <div class="item-form-container">
+                    <label for="creditAmount">
+                        Сумма кредита:
+                        <input type="number" min="1" id="creditAmount" name="creditAmount" required>
+                    </label>
+                </div>
+
+                <div class="item-form-container">
+                    <label for="numberОfMonths">
+                        Количество месяцев:
+                        <input type="number" min="1" id="numberОfMonths" name="numberОfMonths" required>
+                    </label>
+                </div>
+
+                <div class="item-form-container">
+                    <button type="submit">Калькуляция</button>
+                </div>
+
+                <div class="item-form-container">
+                    <div id="resultCalculation"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
