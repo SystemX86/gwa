@@ -50,7 +50,12 @@ function setHashForTagsImg(string $incomingHtml): string
         for ($i = 0; $i < 7; $i++) {
             $randomDigits .= $digits[mt_rand(0, strlen($digits) - 1)];
         }
-        return str_replace($m[1], $m[1] . '?v=' . $randomDigits, $m[0]);
+
+        if (mb_strripos($m[1], '?')) {
+            $resultUrl = str_replace($m[1], $m[1] . '&v=' . $randomDigits, $m[0]);
+        } else {
+            $resultUrl = str_replace($m[1], $m[1] . '?v=' . $randomDigits, $m[0]);
+        }
+        return $resultUrl;
     }, $incomingHtml);
 }
-
