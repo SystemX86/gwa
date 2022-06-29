@@ -14,23 +14,23 @@
 
 Если нужно выбрать игры с одинаковым названием, которые проходили в стране более 3х раз с группировкой (думаю, что именно этот вариант был описан в постановке):<br>
 ```
-SELECT name, country, COUNT(*) AS count FROM info_olympic_games GROUP BY name,country HAVING count > 2;
+SELECT name, COUNT(*) AS count FROM games GROUP BY name,country HAVING count > 2;
 ```
 
 Если нужно выбрать все игры, которые проходили в странах, где было больше 3 игр:
 ```
-SELECT * FROM info_olympic_games WHERE country IN (SELECT country FROM info_olympic_games GROUP BY country HAVING COUNT(*) > 2);
+SELECT * FROM games WHERE country IN (SELECT country FROM games GROUP BY country HAVING COUNT(*) > 2);
 ```
 
 Если нужно выбрать игры с одинаковым названием и страной в которой проходила игра, при этом учитывая, что игра должна была пройти в стране более 3 раз (без группировки по названию игры (стране) в которой проходила игра):
 ```
 SELECT C.* FROM ( SELECT name, country
-FROM info_olympic_games
+FROM games
 GROUP BY name, country
 HAVING COUNT(*) > 2 ) E
-JOIN info_olympic_games C
+JOIN games C
 ON C.name = E.name
-AND C.country = E.country;
+AND C.country = E.country
 ```
 
 ## 2. Задана строка, состоящая из произвольной последовательности цифр (PHP)

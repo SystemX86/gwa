@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:3306
--- Время создания: Июн 29 2022 г., 10:45
+-- Время создания: Июн 29 2022 г., 19:35
 -- Версия сервера: 8.0.29-0ubuntu0.20.04.3
 -- Версия PHP: 7.4.30
 
@@ -25,56 +25,102 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `info_olympic_games`
+-- Структура таблицы `countries`
 --
 
-CREATE TABLE `info_olympic_games` (
+CREATE TABLE `countries` (
   `id` int NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Дамп данных таблицы `countries`
+--
+
+INSERT INTO `countries` (`id`, `name`) VALUES
+(3, 'Германия'),
+(4, 'Италия'),
+(2, 'Польша'),
+(5, 'Португалия'),
+(1, 'Украина');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `games`
+--
+
+CREATE TABLE `games` (
+  `id` int NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
   `date_start` date NOT NULL,
   `date_end` date NOT NULL,
-  `country` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `country` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
--- Дамп данных таблицы `info_olympic_games`
+-- Дамп данных таблицы `games`
 --
 
-INSERT INTO `info_olympic_games` (`id`, `name`, `date_start`, `date_end`, `country`) VALUES
-(1, 'Бадминтон', '2022-06-01', '2022-06-02', 'Украина'),
-(2, 'Академическая гребля', '2022-06-07', '2022-06-09', 'Польша'),
-(3, 'Баскетбол', '2022-06-06', '2022-06-08', 'Украина'),
-(4, 'Бейсбол', '2022-06-21', '2022-06-23', 'Польша'),
-(5, 'Бокс', '2022-05-02', '2022-05-08', 'Украина'),
-(6, 'Борьба', '2022-07-22', '2022-06-25', 'Польша'),
-(7, 'Велоспорт', '2022-07-18', '2022-07-20', 'Германия'),
-(8, 'Волейбол', '2022-07-05', '2022-07-07', 'Италия'),
-(9, 'Гольф', '2022-06-03', '2022-06-05', 'Португалия'),
-(10, 'Водное поло', '2022-08-10', '2022-08-13', 'Германия'),
-(11, 'Гандбол', '2022-08-08', '2022-08-09', 'Италия'),
-(12, 'Гандбол', '2021-08-08', '2021-08-09', 'Италия'),
-(13, 'Гандбол', '2020-08-08', '2020-08-09', 'Италия'),
-(14, 'Водное поло', '2021-08-10', '2021-08-13', 'Германия');
+INSERT INTO `games` (`id`, `name`, `date_start`, `date_end`, `country`) VALUES
+(1, 'Бадминтон', '2022-06-01', '2022-06-02', 1),
+(2, 'Академическая гребля', '2022-06-07', '2022-06-09', 2),
+(3, 'Баскетбол', '2022-06-06', '2022-06-08', 1),
+(4, 'Бейсбол', '2022-06-21', '2022-06-23', 2),
+(5, 'Бокс', '2022-10-11', '2022-10-13', 3),
+(6, 'Борьба', '2022-06-21', '2022-06-23', 3),
+(7, 'Велоспорт', '2022-06-06', '2022-06-08', 3),
+(8, 'Волейбол', '2022-06-21', '2022-06-23', 4),
+(9, 'Гольф', '2022-06-06', '2022-06-08', 5),
+(10, 'Водное поло', '2022-06-21', '2022-06-23', 4),
+(11, 'Водное поло', '2021-06-21', '2021-06-23', 4),
+(12, 'Водное поло', '2020-06-21', '2020-06-23', 4);
 
 --
 -- Индексы сохранённых таблиц
 --
 
 --
--- Индексы таблицы `info_olympic_games`
+-- Индексы таблицы `countries`
 --
-ALTER TABLE `info_olympic_games`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `countries`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Индексы таблицы `games`
+--
+ALTER TABLE `games`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`),
+  ADD KEY `country` (`country`);
 
 --
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
 --
--- AUTO_INCREMENT для таблицы `info_olympic_games`
+-- AUTO_INCREMENT для таблицы `countries`
 --
-ALTER TABLE `info_olympic_games`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+ALTER TABLE `countries`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT для таблицы `games`
+--
+ALTER TABLE `games`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- Ограничения внешнего ключа сохраненных таблиц
+--
+
+--
+-- Ограничения внешнего ключа таблицы `games`
+--
+ALTER TABLE `games`
+  ADD CONSTRAINT `games_ibfk_1` FOREIGN KEY (`country`) REFERENCES `countries` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
