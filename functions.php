@@ -16,7 +16,11 @@ function getNumbersUnpairedQuantity(string $incomingSequence): string
 
     if (count($arrayDigits) > 0) {
         foreach ($arrayDigits as $digit) {
-            $arrayAmount[$digit] = $arrayAmount[$digit] + 1;
+            if (isset($arrayAmount[$digit])) {
+                $arrayAmount[$digit] = $arrayAmount[$digit] + 1;
+            } else {
+                $arrayAmount[$digit] = 1;
+            }
         }
 
         foreach ($arrayAmount as $key => $amount) {
